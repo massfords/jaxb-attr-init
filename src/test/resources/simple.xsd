@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn:example"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+           xmlns:xjc= "http://java.sun.com/xml/ns/jaxb/xjc"
+           xmlns:mf="urn:com.massfords.jaxb"
+           xmlns:annox="http://annox.dev.java.net"
+           jaxb:version="2.1"
+           xsi:schemaLocation=
+                   "http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+           jaxb:extensionBindingPrefixes="mf annox xjc">
+    <xs:annotation>
+        <xs:appinfo>
+            <jaxb:globalBindings mapSimpleTypeDef="true" generateElementProperty="false"/>
+            <xjc:simple/>
+        </xs:appinfo>
+    </xs:annotation>
+
+
+    <xs:complexType name="POP3Host">
+        <xs:annotation><xs:appinfo>
+            <annox:annotate target="class">@javax.xml.bind.annotation.XmlRootElement(name="POP3")</annox:annotate>
+        </xs:appinfo></xs:annotation>
+        <xs:sequence>
+            <xs:element name="foo" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Port" type="xs:int" use="optional" default="110">
+            <xs:annotation>
+                <xs:appinfo>
+                    <mf:attrinit value="110"/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+</xs:schema>
