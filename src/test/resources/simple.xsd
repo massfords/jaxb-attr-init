@@ -30,7 +30,7 @@
         <xs:attribute name="Port" type="xs:int" use="optional" default="110">
             <xs:annotation>
                 <xs:appinfo>
-                    <mf:attrinit value="110"/>
+                    <mf:attrinit/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:attribute>

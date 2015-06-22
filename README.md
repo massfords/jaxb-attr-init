@@ -48,19 +48,25 @@ One common scenario for the above would be a presentation layer in JSON. Perhaps
 there's some approach here where a JSON Schema could be derived from the XSD but
 having the generated code initialize with the default value is much easier.
 
-# What's working
-
-This is early on. So far, I'm only supporting a default value for an Integer field
-and even hard coding it at that! This is easy enough to change and I'll do that
-when I have a need, interest, or someone asks.
-
-The second issue is that I'm currently getting the value to use for the default
-from the extension element whereas I would think I'd be able to get it from the
-xs:attribute element. While this seems possible, I haven't dug into it.
-
 # Sample Schema
 
 See simple.xsd in src/test/resources for an example of the annotation in play
 along with a test case that runs the plugin. So far there are no assertions in the
 test case but the generated code looks good. Again, assertions will come later if
 there's a second commit on this project ;)
+
+    <xs:complexType name="POP3Host">
+        <xs:sequence>
+            <xs:element name="foo" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="Port" type="xs:int" use="optional" default="110">
+            <xs:annotation>
+                <xs:appinfo>
+                    <mf:attrinit/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:attribute>
+    </xs:complexType>
+
+The application fo the mf:attrinit above triggers the plugin to generate an initializer
+for the field.
