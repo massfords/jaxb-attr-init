@@ -26,6 +26,16 @@ Consider the following schema and snippet:
         <xs:attribute name="Port" type="xs:int" use="optional" default="110"/>
     </xs:complexType>
 
+    // default generated getter
+        public int getPort() {
+            if (port == null) {
+                return  110;
+            } else {
+                return port;
+            }
+        }
+
+
     POP3Host host = new POP3Host();
     int port = host.getPort();
     marshalToJSON( host );
