@@ -3,7 +3,7 @@
     <groupId>com.massfords</groupId>
     <artifactId>jaxb-attr-init</artifactId>
     <name>JAXB Attribute Initialization Plugin</name>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <description>XJC plugin that adds initializes attribute values on JAXB classes
         that are defined with a default value for the attribute. Surprisingly,
         this isn't the default behavior of the XJC plugin.
