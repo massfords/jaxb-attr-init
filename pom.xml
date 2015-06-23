@@ -3,7 +3,7 @@
     <groupId>com.massfords</groupId>
     <artifactId>jaxb-attr-init</artifactId>
     <name>JAXB Attribute Initialization Plugin</name>
-    <version>0.1</version>
+    <version>0.1-SNAPSHOT</version>
     <description>XJC plugin that adds initializes attribute values on JAXB classes
         that are defined with a default value for the attribute. Surprisingly,
         this isn't the default behavior of the XJC plugin.
@@ -21,7 +21,7 @@
         <url>https://github.com/massfords/jaxb-attr-init</url>
         <connection>scm:git:git://github.com/massfords/jaxb-attr-init.git</connection>
         <developerConnection>scm:git:git@github.com:massfords/jaxb-attr-init.git</developerConnection>
-        <tag>jaxb-attr-init-0.1</tag>
+        <tag>HEAD</tag>
     </scm>
     <distributionManagement>
         <snapshotRepository>
