@@ -39,7 +39,7 @@
                 </executions>
                 <configuration>
                     <extension>true</extension>
-                    <arguments>-Xfluent-api -Xannotate -mark-generated -Xattrinit</arguments>
+                    <arguments>-Xannotate -Xattrinit</arguments>
                     <schemaDirectory>src/main/resources</schemaDirectory>
                     <!-- keep the generated sources around. They are helpful for debugging. -->
                     <clearOutputDir>false</clearOutputDir>
@@ -63,19 +63,9 @@
                         <version>2.11.0</version>
                     </dependency>
                     <dependency>
-                        <groupId>net.java.dev.jaxb2-commons</groupId>
-                        <artifactId>jaxb-fluent-api</artifactId>
-                        <version>2.1.8</version>
-                    </dependency>
-                    <dependency>
                         <groupId>org.jvnet.jaxb2_commons</groupId>
                         <artifactId>jaxb2-basics-annotate</artifactId>
                         <version>1.0.1</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.hibernate</groupId>
-                        <artifactId>hibernate-validator</artifactId>
-                        <version>4.3.0.Final</version>
                     </dependency>
                     <dependency>
                         <groupId>com.fasterxml.jackson.core</groupId>
