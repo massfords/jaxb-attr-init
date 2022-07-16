@@ -83,7 +83,7 @@ public class AttributeInitializerPlugin extends Plugin {
 
     private void processFieldOutline(Outline outline, FieldOutline fieldOutline,
                                      ErrorHandler errorHandler) throws SAXException {
-        // Get all of the customizations attached to this field
+        // Get all customizations attached to this field
         final CCustomizations customizations =
                 CustomizationUtils.getCustomizations(fieldOutline);
 
