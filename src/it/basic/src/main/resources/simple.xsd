@@ -2,6 +2,7 @@
 <xs:schema targetNamespace="urn:example"
            attributeFormDefault="unqualified"
            elementFormDefault="qualified"
+           xmlns:tns="urn:example"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
@@ -34,6 +35,21 @@
                 </xs:appinfo>
             </xs:annotation>
         </xs:attribute>
+        <xs:attribute name="MyEnum" type="tns:myEnum" use="optional" default="BETA">
+            <xs:annotation>
+                <xs:appinfo>
+                    <mf:attrinit/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:attribute>
     </xs:complexType>
+
+    <xs:simpleType name="myEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ALPHA"/>
+            <xs:enumeration value="BETA"/>
+            <xs:enumeration value="GAMMA"/>
+        </xs:restriction>
+    </xs:simpleType>
 
 </xs:schema>

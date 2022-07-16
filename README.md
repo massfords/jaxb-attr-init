@@ -9,36 +9,45 @@ away from having access to a Schema and would instead prefer to be told what
 the default values for fields are.
 
 I had assumed that this was a solved problem but here's what I found:
+
 - XJC behavior for default attributes is to provide the default value through
-the getter. This is fine but if you're marshalling via the XmlFieldAccessor
-then this doesn't help.
+  the getter. This is fine but if you're marshalling via the XmlFieldAccessor
+  then this doesn't help.
 - There's a JAXB Default Value plugin but this focuses on elements since
-attributes are supposedly covered.
+  attributes are supposedly covered.
 
 # Example Use Case
 
 Consider the following schema and snippet:
 
-    <xs:complexType name="POP3Host">
-        <xs:sequence>
-            <xs:element name="foo" type="xs:string"/>
-        </xs:sequence>
-        <xs:attribute name="Port" type="xs:int" use="optional" default="110"/>
-    </xs:complexType>
+```xml
 
+<xs:complexType name="POP3Host">
+    <xs:sequence>
+        <xs:element name="foo" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="Port" type="xs:int" use="optional" default="110"/>
+</xs:complexType>
+```
+
+```java
+class Example {
     // default generated getter
-        public int getPort() {
-            if (port == null) {
-                return  110;
-            } else {
-                return port;
-            }
+    public int getPort() {
+        if (port == null) {
+            return 110;
+        } else {
+            return port;
         }
+    }
 
-
-    POP3Host host = new POP3Host();
-    int port = host.getPort();
-    marshalToJSON( host );
+    static void example() {
+        POP3Host host = new POP3Host();
+        int port = host.getPort();
+        marshalToJSON(host);
+    }
+}
+```
 
 In the above snippet, the caller explicitly invokes the getter on the POP3Host
 and with the default code generated from the XJC plugin, the port field will be
@@ -46,8 +55,14 @@ seen to be null and then initialized to 110 before getting returned.
 
 However, what if the caller never invokes the getPort() method?
 
-    POP3Host host = new POP3Host();
-    marshalToJSON( host );
+```java
+class Example {
+    static void example() {
+        POP3Host host = new POP3Host();
+        marshalToJSON(host);
+    }
+}
+```
 
 The recipient of this payload will get a structure that doesn't have a value for
 the port field. If they are using JAXB with the same schema then this isn't a
@@ -65,18 +80,21 @@ along with a test case that runs the plugin. So far there are no assertions in t
 test case but the generated code looks good. Again, assertions will come later if
 there's a second commit on this project ;)
 
-    <xs:complexType name="POP3Host">
-        <xs:sequence>
-            <xs:element name="foo" type="xs:string"/>
-        </xs:sequence>
-        <xs:attribute name="Port" type="xs:int" use="optional" default="110">
-            <xs:annotation>
-                <xs:appinfo>
-                    <mf:attrinit/>
-                </xs:appinfo>
-            </xs:annotation>
-        </xs:attribute>
-    </xs:complexType>
+```xml
+
+<xs:complexType name="POP3Host">
+    <xs:sequence>
+        <xs:element name="foo" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="Port" type="xs:int" use="optional" default="110">
+        <xs:annotation>
+            <xs:appinfo>
+                <mf:attrinit/>
+            </xs:appinfo>
+        </xs:annotation>
+    </xs:attribute>
+</xs:complexType>
+```
 
 The application fo the mf:attrinit above triggers the plugin to generate an initializer
 for the field.
