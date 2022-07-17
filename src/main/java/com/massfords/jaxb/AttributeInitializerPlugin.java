@@ -103,7 +103,7 @@ public class AttributeInitializerPlugin extends Plugin {
             // element. We're only going to process the first one in the list
             if (ourCustomizations.size()>1) {
                 ourCustomizations.subList(1, ourCustomizations.size()).forEach(
-                        c->warn("ignoring extra attrinit elements", errorHandler, c.locator)
+                        c-> extraElements(errorHandler, c.locator)
                 );
             }
 
@@ -134,15 +134,9 @@ public class AttributeInitializerPlugin extends Plugin {
         } // no need for an else here. It's not a schema particle we're interested in
     }
 
-    /**
-     * Odd that the ErrorHandler has a checked exception when trying to report an error.
-     * @param message
-     * @param errorHandler
-     * @param locator
-     */
-    private void warn(String message, ErrorHandler errorHandler, Locator locator) {
+    private void extraElements(ErrorHandler errorHandler, Locator locator) {
         try {
-            errorHandler.warning(new SAXParseException(message, locator, null));
+            errorHandler.warning(new SAXParseException("ignoring extra attrinit elements", locator, null));
         } catch (SAXException e) {
             // ignore any exceptions while we're trying to warn the user
         }
@@ -162,7 +156,7 @@ public class AttributeInitializerPlugin extends Plugin {
     }
 
     /**
-     * Returns all of the namespaces we're looking to handle
+     * Returns the namespaces we're looking to handle
      * @return
      */
     @Override
